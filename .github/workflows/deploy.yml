@@ -8,7 +8,7 @@ on:
       docker_image:
         description: 'Docker image to deploy'
         required: false
-        default: 'latest'
+        default: 'danblanco/fastapi-cicd:latest'
 
 permissions:
   id-token: write  # Required for OIDC
@@ -69,4 +69,5 @@ jobs:
       - name: Deployment summary
         run: |
           echo "✅ Deployment completed successfully!"
+
           echo "Target environment: dev"
