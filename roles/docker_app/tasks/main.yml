@@ -1,0 +1,49 @@
+---
+- name: Ensure Docker is installed
+  ansible.builtin.dnf:
+    name: docker
+    state: present
+  become: true
+
+- name: Ensure Docker service is running
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: true
+  become: true
+
+- name: Add ec2-user to docker group
+  ansible.builtin.user:
+    name: ec2-user
+    groups: docker
+    append: true
+  become: true
+
+- name: Pull latest Docker image
+  community.docker.docker_image:
+    name: "{{ docker_image }}"
+    source: pull
+    force_source: true  # Always pull latest
+  become: true
+  notify: Restart container
+
+- name: Ensure FastAPI container is running
+  community.docker.docker_container:
+    name: fastapi-app
+    image: "{{ docker_image }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "80:8000"
+    detach: true
+  become: true
+  register: container_result
+
+- name: Wait for application to be ready
+  ansible.builtin.uri:
+    url: "http://localhost/health"
+    status_code: 200
+  retries: 10
+  delay: 3
+  register: health_check
+  until: health_check.status == 200

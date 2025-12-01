@@ -1,0 +1,7 @@
+---
+- name: Restart container
+  community.docker.docker_container:
+    name: fastapi-app
+    state: started
+    restart: true
+  become: true
