@@ -9,7 +9,7 @@
     ansible_aws_ssm_region: us-east-1
     ansible_user: ssm-user
     ansible_python_interpreter: /usr/bin/python3
-    docker_image: "danblanco/fastapi-cicd:latest"  # UPDATE THIS!
+    docker_image: "danblanco/fastapi-cicd:latest"   # UPDATE THIS!
   
   tasks:
     - name: Display target hosts
