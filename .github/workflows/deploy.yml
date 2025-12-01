@@ -63,7 +63,7 @@ jobs:
       
       - name: Run Ansible playbook
         run: |
-          ansible-playbook playbooks/deploy.yml -v
+          ansible-playbook playbooks/deploy.yml -vvv
         env:
           ANSIBLE_HOST_KEY_CHECKING: false
       
@@ -72,5 +72,6 @@ jobs:
           echo "✅ Deployment completed successfully!"
 
           echo "Target environment: dev"
+
 
 
