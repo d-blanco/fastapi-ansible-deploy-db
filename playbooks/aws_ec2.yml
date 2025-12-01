@@ -23,6 +23,6 @@ hostnames:
 
 compose:
   # Use SSM for connection
-  ansible_connection: aws_ssm
+  ansible_connection: amazon.aws.aws_ssm
   ansible_aws_ssm_region: us-east-1
-  ansible_aws_ssm_bucket_name: ""  # Empty means don't use S3 for session logs
+  ansible_python_interpreter: /usr/bin/python3
