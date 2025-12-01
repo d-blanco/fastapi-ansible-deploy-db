@@ -1,8 +1,6 @@
 name: Deploy with Ansible
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:  # Allow manual triggers
     inputs:
       docker_image:
@@ -71,3 +69,4 @@ jobs:
           echo "✅ Deployment completed successfully!"
 
           echo "Target environment: dev"
+
