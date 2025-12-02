@@ -11,21 +11,13 @@ on:
         description: 'Environment (dev, staging, prod)'
         required: false
         default: 'dev'
-  
-  push:
-    branches:
-      - main
-    paths:
-      - 'packer.pkr.hcl'
-      - 'scripts/**'
-      - '.github/workflows/build-ami.yml'
 
 permissions:
   id-token: write  # Required for OIDC
   contents: read
 
 env:
-  AWS_REGION: us-west-1
+  AWS_REGION: us-east-1
   PACKER_VERSION: "1.10.0"
 
 jobs:
@@ -89,4 +81,5 @@ jobs:
           retention-days: 30
     
     outputs:
+
       ami_id: ${{ steps.ami.outputs.ami_id }}
